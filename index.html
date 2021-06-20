@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>alphabets</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     var chars = [
       ["अ", "A"],
@@ -19,15 +20,22 @@
       ["अ:", "Aha"],
     ]
 
+    function load_alphabets(data_file) {
+      $.getJSON(data_file, function setup_chars(result) {
+        chars = result;
+        display_random_char();
+      });
+    }
     function display_random_char() {
       const randomIndex = Math.floor(Math.random() * chars.length);
       const item = chars[randomIndex];
-      console.log(item)
-      e = document.getElementById("character");
-      e.innerHTML = item[0];
-      e = document.getElementById("sound");
-      e.innerHTML = item[1];
+      $("#character").html(item[0]);
+      $("#sound").html(item[1]);
     }
+
+    $(document).ready(function document_ready(){
+      display_random_char();
+    });
   </script>
 </head>
 
@@ -37,11 +45,7 @@
     <div id="sound" style="text-align:center; font-size:5em;"></div>
   </div>
   <br/>
-  <a data-file="svar.json">hindi-svar</a> | 
-  <a data-file="vyanjan.json">hindi-vyanjan</a>
+  <a onclick="load_alphabets('svar.json');">hindi-svar</a> | 
+  <a onclick="load_alphabets('vyanjan.json');">hindi-vyanjan</a>
 </body>
-<script>
-  display_random_char()
-</script>
-
 </html>
