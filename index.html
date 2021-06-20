@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <title>alphabets</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -33,7 +34,7 @@
       $("#sound").html(item[1]);
     }
 
-    $(document).ready(function document_ready(){
+    $(document).ready(function document_ready() {
       display_random_char();
     });
   </script>
@@ -44,8 +45,11 @@
     <div id="character" style="text-align:center; font-size:15em;"></div>
     <div id="sound" style="text-align:center; font-size:5em;"></div>
   </div>
-  <br/>
-  <a onclick="load_alphabets('svar.json');">hindi-svar</a> | 
-  <a onclick="load_alphabets('vyanjan.json');">hindi-vyanjan</a>
+  <br />
+  <div style="text-align:center;">
+    <a onclick="load_alphabets('svar.json');">hindi-svar</a> |
+    <a onclick="load_alphabets('vyanjan.json');">hindi-vyanjan</a>
+  </div>
 </body>
+
 </html>
