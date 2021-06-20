@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+<meta charset="UTF-8">
 
 <head>
   <title>alphabets</title>
@@ -27,6 +28,15 @@
         display_random_char();
       });
     }
+
+    function show_help() {
+      $("#sound").show();
+    }
+
+    function hide_help() {
+      $("#sound").hide();
+    }
+
     function display_random_char() {
       const randomIndex = Math.floor(Math.random() * chars.length);
       const item = chars[randomIndex];
@@ -41,15 +51,16 @@
 </head>
 
 <body style="height:100%; width:100%;">
-  <div style="height:100%; width:100%;" onclick="display_random_char();">
-    <div id="character" style="text-align:center; font-size:15em;"></div>
-    <div id="sound" style="text-align:center; font-size:5em; display: none;"></div>
+  <div style="text-align:center;">
+    <a onclick="show_help();">show help</a> |
+    <a onclick="hide_help();">hide help</a>
   </div>
   <br />
-  <div style="text-align:center;">
-    <a onlick="$('#sound').show();">show help</a> |
-    <a onlick="$('#sound').hide();">hide help</a>
+  <div style="height:100%; width:100%;" onclick="display_random_char();">
+    <div id="character" style="text-align:center; font-size:15em;"></div>
+    <div id="sound" style="text-align:center; font-size:5em;"></div>
   </div>
+  <br />
   <div style="text-align:center;">
     <a onclick="load_alphabets('svar.json');">hindi-svar</a> |
     <a onclick="load_alphabets('vyanjan.json');">hindi-vyanjan</a> |
