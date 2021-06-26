@@ -6,6 +6,8 @@
   <title>alphabets</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+    var test = false;
+    var current_index = 0;
     var chars = [
       ["अ", "A"],
       ["आ", "Aa"],
@@ -20,53 +22,74 @@
       ["औ", "Au"],
       ["अं", "Am"],
       ["अ:", "Aha"],
-    ]
+    ];
 
     function load_alphabets(data_file) {
       $.getJSON(data_file, function setup_chars(result) {
         chars = result;
-        display_random_char();
+        current_index = 0;
+        display();
       });
     }
 
     function show_help() {
       $("#sound").show();
+      test = false;
     }
 
     function hide_help() {
       $("#sound").hide();
+      test = true;
     }
 
-    function display_random_char() {
+    function display() {
+      if (test) {
+        data = get_random_char();
+      } else {
+        data = get_next_char();
+      }
+      $("#character").html(data[0]);
+      $("#sound").html(data[1]);
+    }
+
+    function get_next_char() {
+      const item = chars[current_index];
+      current_index += 1;
+      if (current_index == chars.length) {
+        current_index = 0;
+      }
+      return item;
+    }
+
+    function get_random_char() {
       const randomIndex = Math.floor(Math.random() * chars.length);
       const item = chars[randomIndex];
-      $("#character").html(item[0]);
-      $("#sound").html(item[1]);
+      return item;
     }
 
     $(document).ready(function document_ready() {
-      display_random_char();
+      display()
     });
   </script>
 </head>
 
 <body style="height:100%; width:100%;">
-  <div style="text-align:center;">
-    <a onclick="show_help();">show help</a> |
-    <a onclick="hide_help();">hide help</a>
-  </div>
-  <br />
-  <div style="height:100%; width:100%;" onclick="display_random_char();">
+  <div style="height:100%; width:100%;" onclick="display();">
     <div id="character" style="text-align:center; font-size:15em;"></div>
     <div id="sound" style="text-align:center; font-size:5em;"></div>
   </div>
   <br />
   <div style="text-align:center;">
-    <a onclick="load_alphabets('svar.json');">hindi-svar</a> |
-    <a onclick="load_alphabets('vyanjan.json');">hindi-vyanjan</a> |
-    <a onclick="load_alphabets('uyir.json');">tamil-uyir</a> |
-    <a onclick="load_alphabets('mei.json');">tamil-mei</a> |
-    <a onclick="load_alphabets('uyirmei.json');">tamil-uyir mei</a> |
+    <button onclick="show_help();">Learn</button> |
+    <button onclick="hide_help();">Test</button>
+  </div>
+  <br />
+  <div style="text-align:center;">
+    <button onclick="load_alphabets('svar.json');">hindi-svar</button> |
+    <button onclick="load_alphabets('vyanjan.json');">hindi-vyanjan</button> |
+    <button onclick="load_alphabets('uyir.json');">tamil-uyir</button> |
+    <button onclick="load_alphabets('mei.json');">tamil-mei</button> |
+    <button onclick="load_alphabets('uyirmei.json');">tamil-uyir mei</button> |
   </div>
 </body>
 
